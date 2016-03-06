@@ -1,16 +1,20 @@
 apiVersion: v1
 kind: ReplicationController
 metadata:
+  name: zookeeper
   labels:
     app: zookeeper
-  name: zookeeper
+    name: zookeeper
+
 spec:
   replicas: 1
   selector:
-      app: zookeeper
+    name: zookeeper
+    app: zookeeper
   template:
     metadata:
       labels:
+        name: zookeeper
         app: zookeeper
     spec:
       containers:
