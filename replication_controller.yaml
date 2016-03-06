@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ReplicationController
 metadata:
-  name: zookeeper
+  name: zookeeperrc
   labels:
     app: zookeeper
     name: zookeeper
