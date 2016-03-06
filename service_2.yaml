@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: zookeeper-svc-2
+  labels:
+    name: zookeeper-svc-2
+    tool: zookeeper
+
+spec:
+  ports:
+  - name: client
+    port: 2181
+    targetPort: 2181
+    nodePort: 0
+    protocol: TCP
+
+  - name: peer
+    port: 2888
+    targetPort: 2888
+    nodePort: 0
+    protocol: TCP
+
+  - name: leaderelection
+    port: 3888
+    targetPort: 3888
+    nodePort: 0
+    protocol: TCP
+
+  selector:
+    name: zookeeper
+    server: zookeeper-server-2

@@ -1,0 +1,50 @@
+# http://zookeeper.apache.org/doc/trunk/zookeeperReconfig.html
+# https://github.com/winston-li/k8s-cassandra/blob/06b4fe7037ad6828592401f52133e7934ed41fc0/image/run.sh#L9
+# https://github.com/arypurnomoz/kubernetes-cockroach.docker/blob/2b541bcadd144dd92781919d363fd2f73519d740/run.sh#L11
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: zookeeper-rc-1
+  labels:
+    name: zookeeper-rc
+    tool: zookeeper
+
+spec:
+  replicas: 1
+  selector:
+    name: zookeeper
+    server: zookeeper-server-1
+  template:
+    metadata:
+      labels:
+        name: zookeeper
+        server: zookeeper-server-1
+    spec:
+      containers:
+      - name: zookeeper-server-1
+        image: digitalwonderland/zookeeper
+        # command:
+        #   - /run.sh
+        resources:
+          limits:
+            cpu: 0.1
+
+        env:
+          - name: ZOOKEEPER_ID
+            value: "1"
+          - name: ZOOKEEPER_SERVER_1
+            value: zookeeper-svc-1
+
+        ports:
+          - containerPort: 2181
+            hostPort: 2181
+            name: client
+
+          - containerPort: 2888
+            hostPort: 2888
+            name: peer
+
+          - containerPort: 3888
+            hostPort: 3888
+            name: leaderelection
+        imagePullPolicy: IfNotPresent

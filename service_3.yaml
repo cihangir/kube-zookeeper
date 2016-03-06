@@ -1,8 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: zookeeperservice
+  name: zookeeper-svc-3
   labels:
+    name: zookeeper-svc-3
     tool: zookeeper
 
 spec:
@@ -26,5 +27,5 @@ spec:
     protocol: TCP
 
   selector:
-    app: zookeeper
     name: zookeeper
+    server: zookeeper-server-3

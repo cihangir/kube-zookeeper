@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: zookeeper-rc-2
+  labels:
+    name: zookeeper-rc
+    tool: zookeeper
+
+spec:
+  replicas: 1
+  selector:
+    name: zookeeper
+    server: zookeeper-server-2
+  template:
+    metadata:
+      labels:
+        name: zookeeper
+        server: zookeeper-server-2
+    spec:
+      containers:
+      - name: zookeeper-server-2
+        image: digitalwonderland/zookeeper
+        # command:
+        #   - /run.sh
+        resources:
+          limits:
+            cpu: 0.1
+        env:
+          - name: ZOOKEEPER_ID
+            value: "2"
+          - name: ZOOKEEPER_SERVER_2
+            value: zookeeper-svc-2
+
+        ports:
+          - containerPort: 2181
+            hostPort: 2181
+            name: client
+
+          - containerPort: 2888
+            hostPort: 2888
+            name: peer
+
+          - containerPort: 3888
+            hostPort: 3888
+            name: leaderelection
+
+        imagePullPolicy: IfNotPresent
