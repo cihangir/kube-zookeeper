@@ -29,9 +29,13 @@ spec:
             value: somerandomenvvalue
         ports:
           - containerPort: 2181
+            hostPort: 2181
             name: client
+
           - containerPort: 2888
+            hostPort: 2888
             name: peer
+
           - containerPort: 3888
+            hostPort: 3888
             name: leaderelection
-        
