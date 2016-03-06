@@ -47,4 +47,5 @@ spec:
           - containerPort: 3888
             hostPort: 3888
             name: leaderelection
+
         imagePullPolicy: IfNotPresent
