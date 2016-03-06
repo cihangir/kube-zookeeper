@@ -24,6 +24,9 @@ spec:
         resources:
           limits:
             cpu: 0.1
+        env:
+          - name: somerandomenvvar
+            value: somerandomenvvalue
         ports:
           - containerPort: 2181
             name: client
@@ -31,3 +34,4 @@ spec:
             name: peer
           - containerPort: 3888
             name: leaderelection
+        
