@@ -1,3 +1,9 @@
+# The services in a Kubernetes cluster are discoverable inside other containers
+# via environment variables.
+
+# An alternative is to use the cluster's DNS service, if it has been enabled for
+# the cluster. This lets all pods do name resolution of services automatically,
+# based on the service name.
 apiVersion: v1
 kind: Service
 metadata:
@@ -9,7 +15,9 @@ metadata:
 spec:
   ports:
   - name: client
+    # on which port listen to service traffic
     port: 2181
+    # which port to forward on - can be omitted if we want to forward to same "port"
     targetPort: 2181
     nodePort: 0
     protocol: TCP
